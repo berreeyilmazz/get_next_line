@@ -3,51 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: havyilma <havyilma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: berreyilmaz <berreyilmaz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 00:24:26 by havyilma          #+#    #+#             */
-/*   Updated: 2022/11/12 05:16:19 by havyilma         ###   ########.fr       */
+/*   Created: 2022/11/18 18:40:25 by berreyilmaz       #+#    #+#             */
+/*   Updated: 2022/11/19 14:55:34 by berreyilmaz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_buffer(int fd, char *str)
+char    *ft_rdfunction(int fd, char *str)
 {
-	int		rd;
-	char	*buff;
+    int     rd;
+    char    *buffer;
 
-	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buff)
-		return (NULL);
-	rd = 1;
-	while (!ft_strchr(str, '\n') && rd != 0)
-	{
-		rd = read(fd, buff, BUFFER_SIZE);
-		if (rd == -1)
-		{
-			free(str);
-			free(buff);
-			return (NULL);
-		}
-		buff[rd] = 0;
-		str = ft_strjoin(str, buff);
-	}
-	free(buff);
-	return(str);
+    buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+    if (!buffer)
+        return (0);
+    rd = 1;
+    while(!ft_check_nl(str) && rd != 0)
+    {
+        rd = read(fd, buffer, BUFFER_SIZE);
+        if (rd == -1)
+        {
+            free(str);
+            free(buffer);
+            return (0);
+        }
+        *(buffer + rd) = 0;
+        str = ft_strjoin(str, buffer);
+    }
+    free (buffer);
+    return (str);
 }
 
-char	*get_next_line(int fd)
+char    *get_next_line(int fd)
 {
-	char		*line;
-	static char	*str;
+    static char     *read;
+    char            *line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	str = ft_buffer(fd, str);
-	if (!str)
-		return (NULL);
-	line = ft_get_line(str);
-	str = ft_get_the_lastline(str);
-	return (line);
+    if (fd < 0 && BUFFER_SIZE <= 0)
+        return (0);
+    read = ft_rdfunction(fd, read);
+    if (!read)
+        return (0);
+    line = ft_newline(read);
+    read = ft_reststr(read);
+    return (line);
 }
