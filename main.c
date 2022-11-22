@@ -2,11 +2,9 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int main()
+int main(void)
 {
-    int fd = open("deneme.txt", O_RDWR, 0777);
-    printf("%s", get_next_line(fd));
-    printf("%s", get_next_line(fd));
-    printf("%s", get_next_line(fd));
-    printf("%s", get_next_line(fd));
+	int	fd = open("d.txt", O_RDWR | O_CREAT, 0777);
+	printf("sonuc : %s",get_next_line(0));
+	return (0);
 }
