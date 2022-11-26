@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: havyilma <havyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 15:38:40 by havyilma          #+#    #+#             */
-/*   Updated: 2022/11/26 16:00:08 by havyilma         ###   ########.fr       */
+/*   Created: 2022/11/26 15:21:47 by havyilma          #+#    #+#             */
+/*   Updated: 2022/11/26 16:02:39 by havyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(char *s)
 {
@@ -78,7 +78,7 @@ char	*ft_get_line(char *str)
 	if (!*str)
 		return (NULL);
 	while (str[j] != '\n' && str[j])
-		j++;
+	j++;
 	new = malloc(sizeof(char) * (j + 2));
 	if (!new)
 		return (NULL);
@@ -114,7 +114,7 @@ char	*ft_rest_str(char *old)
 	i = 0;
 	j++;
 	while (old[j])
-		new[i++] = old[j++];
+	new[i++] = old[j++];
 	new[i] = '\0';
 	free(old);
 	return (new);
